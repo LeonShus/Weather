@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import style from './App.module.css'
+import Weather from './Components/Weather/Weather';
+import { connect } from 'react-redux'
+import { setWeatherByCityName, setWeatherByCords } from './Store/Reducers/WeatherReducer'
 
-function App() {
+function App(props) {
+  // Получаем данные по месту положения
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(position => {
+        console.log(position)
+        props.setWeatherByCords(position.coords.latitude, position.coords.longitude)
+    })
+  },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={style.container}>
+      <Weather weather={props.weather} setWeatherByCityName={props.setWeatherByCityName} />
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    weather: state.weather
+  }
+}
+
+export default connect(mapStateToProps, { setWeatherByCityName, setWeatherByCords })(App)
