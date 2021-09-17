@@ -1,11 +1,13 @@
 .container {
   /* position: relative; */
   margin: auto;
-  border: 1px solid black;
-  width: 580px;
+  border: 1px solid #2e4453;
+  width: 590px;
+  height: 100vh;
+
 }
 
-@media(max-width: 580px){
+@media(max-width: 590px){
   .container {
     width: 100%;
   }

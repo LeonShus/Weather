@@ -1,5 +1,7 @@
 import CitySearch from './Search/CitySearch'
 import style from './Weather.module.css'
+import { IoWater } from 'react-icons/io5'
+import { RiWindyLine } from 'react-icons/ri'
 
 
 
@@ -32,11 +34,19 @@ const Weather = (props) => {
                     </div>
 
                     <div className={style.stats}>
-                        {weatherData.weather['0'].description.slice(0, 1).toUpperCase() + weatherData.weather['0'].description.slice(1)}
-                        <br />
-                        Humidity : {weatherData.main.humidity}%
-                        <br />
-                        Wind : {weatherData.wind.speed} m/s
+
+                        <div>
+                            {weatherData.weather['0'].description.slice(0, 1).toUpperCase() + weatherData.weather['0'].description.slice(1)}
+                        </div>
+                        
+                        <div>
+                            <IoWater/> Humidity : {weatherData.main.humidity}%
+                        </div>
+
+                        <div>
+                          <RiWindyLine />  Wind : {weatherData.wind.speed} m/s
+                        </div>
+                        
                     </div>
                 </>
             }
